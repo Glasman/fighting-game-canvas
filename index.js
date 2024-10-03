@@ -11,8 +11,11 @@ canvas.height = 576;
 c.fillRect(0, 0, canvas.width, canvas.height);
 
 class Sprite {
-  constructor(position) {
+  //constructor arguments wrapped in one object to minimize confusion when putting in many arguments
+  //this way the order of the arguments does not matter and they are not required as they are all just properties of the object being passed in
+  constructor({ position, velocity }) {
     this.position = position;
+    this.velocity = velocity;
   }
   //draw() is an arbitrary naming convention, can be named whatever we want
   draw() {
@@ -34,3 +37,13 @@ const enemy = new Sprite({
 });
 
 enemy.draw();
+
+//arbitrary naming convention, can be named whatever we want
+function animate() {
+  //The window.requestAnimationFrame() method tells the browser you wish to perform an animation.
+  //It requests the browser to call a user-supplied callback function before the next repaint.
+  //in this instance animate() calls requestAnimationFrame which calls animate(), looping it as long as we need
+  window.requestAnimationFrame(animate);
+}
+
+// animate()
