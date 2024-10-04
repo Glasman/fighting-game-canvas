@@ -62,6 +62,8 @@ const enemy = new Sprite({
   },
 });
 
+// with the aid of this we can be pressing the d key and making the sprite move right,
+//then press the a key while still holding the d key to make the sprite move to the left
 const keys = {
   a: {
     pressed: false,
