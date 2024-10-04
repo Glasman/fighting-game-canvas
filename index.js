@@ -10,7 +10,7 @@ canvas.height = 576;
 //canvas context is what's used to draw shapes on the screen, and once we have the canvas context we can start using the canvas api
 c.fillRect(0, 0, canvas.width, canvas.height);
 
-const gravity = 0.2;
+const gravity = 0.8;
 
 class Sprite {
   //constructor arguments wrapped in one object to minimize confusion when putting in many arguments
@@ -126,7 +126,7 @@ window.addEventListener("keydown", (event) => {
       player.lastKey = "a";
       break;
     case "w":
-      player.velocity.y = -10;
+      player.velocity.y = -20;
       break;
 
     case "ArrowRight":
@@ -138,7 +138,7 @@ window.addEventListener("keydown", (event) => {
       enemy.lastKey = "ArrowLeft";
       break;
     case "ArrowUp":
-      enemy.velocity.y = -10;
+      enemy.velocity.y = -20;
       break;
   }
   console.log(event.key);
