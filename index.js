@@ -22,21 +22,34 @@ class Sprite {
     c.fillStyle = "red";
     c.fillRect(this.position.x, this.position.y, 50, 150);
   }
+
+  update() {
+    this.draw();
+    this.position.y += 10;
+  }
 }
 
 const player = new Sprite({
-  x: 0,
-  y: 0,
+  position: {
+    x: 0,
+    y: 0,
+  },
+  velocity: {
+    x: 0,
+    y: 0,
+  },
 });
-
-player.draw();
 
 const enemy = new Sprite({
-  x: 400,
-  y: 100,
+  position: {
+    x: 400,
+    y: 100,
+  },
+  velocity: {
+    x: 0,
+    y: 0,
+  },
 });
-
-enemy.draw();
 
 //arbitrary naming convention, can be named whatever we want
 function animate() {
@@ -44,6 +57,10 @@ function animate() {
   //It requests the browser to call a user-supplied callback function before the next repaint.
   //in this instance animate() calls requestAnimationFrame which calls animate(), looping it as long as we need
   window.requestAnimationFrame(animate);
+
+  c.clearRect(0, 0, canvas.width, canvas.height);
+  player.update();
+  enemy.update();
 }
 
-// animate()
+animate();
