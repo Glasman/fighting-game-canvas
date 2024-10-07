@@ -183,6 +183,7 @@ window.addEventListener("keydown", (event) => {
       break;
   }
   console.log(event.key);
+  console.log('im cool');
 });
 
 window.addEventListener("keyup", (event) => {
