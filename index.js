@@ -15,14 +15,18 @@ const gravity = 0.8;
 class Sprite {
   //constructor arguments wrapped in one object to minimize confusion when putting in many arguments
   //this way the order of the arguments does not matter and they are not required as they are all just properties of the object being passed in
-  constructor({ position, velocity, color = "red" }) {
+  constructor({ position, velocity, color = "red", offset }) {
     this.position = position;
     this.velocity = velocity;
     this.width = 50;
     this.height = 150;
     this.lastKey;
     this.attackBox = {
-      position: this.position,
+      position: {
+        x: this.position.x,
+        y: this.position.y,
+      },
+      offset: offset,
       width: 100,
       height: 50,
     };
@@ -35,19 +39,21 @@ class Sprite {
     c.fillRect(this.position.x, this.position.y, this.width, this.height);
 
     //attack boxes
-    if (this.isAttacking) {
-      c.fillStyle = "green";
-      c.fillRect(
-        this.attackBox.position.x,
-        this.attackBox.position.y,
-        this.attackBox.width,
-        this.attackBox.height
-      );
-    }
+    // if (this.isAttacking) {
+    c.fillStyle = "green";
+    c.fillRect(
+      this.attackBox.position.x,
+      this.attackBox.position.y,
+      this.attackBox.width,
+      this.attackBox.height
+    );
+    // }
   }
 
   update() {
     this.draw();
+    this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
+    this.attackBox.position.y = this.position.y;
 
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
@@ -76,6 +82,10 @@ const player = new Sprite({
     x: 0,
     y: 0,
   },
+  offset: {
+    x: 0,
+    y: 0,
+  },
 });
 
 const enemy = new Sprite({
@@ -85,6 +95,10 @@ const enemy = new Sprite({
   },
   velocity: {
     x: 0,
+    y: 0,
+  },
+  offset: {
+    x: -50,
     y: 0,
   },
   color: "blue",
