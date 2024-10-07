@@ -145,6 +145,7 @@ function animate() {
     player.attackBox.position.y <= enemy.position.y + enemy.height &&
     player.isAttacking
   ) {
+    player.isAttacking = false;
     console.log("hit!");
   }
 }
@@ -165,9 +166,9 @@ window.addEventListener("keydown", (event) => {
     case "w":
       player.velocity.y = -20;
       break;
-      case ' ':
-        player.attack()
-        break
+    case " ":
+      player.attack();
+      break;
 
     //enemy movement
     case "ArrowRight":
@@ -183,7 +184,6 @@ window.addEventListener("keydown", (event) => {
       break;
   }
   console.log(event.key);
-  console.log('im cool');
 });
 
 window.addEventListener("keyup", (event) => {
