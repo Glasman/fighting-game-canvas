@@ -15,16 +15,32 @@ const gravity = 0.8;
 class Sprite {
   //constructor arguments wrapped in one object to minimize confusion when putting in many arguments
   //this way the order of the arguments does not matter and they are not required as they are all just properties of the object being passed in
-  constructor({ position, velocity }) {
+  constructor({ position, velocity, color = "red" }) {
     this.position = position;
     this.velocity = velocity;
+    this.width = 50
     this.height = 150;
     this.lastKey;
+    this.attackBox = {
+      position: this.position,
+      width: 100,
+      height: 50,
+    };
+    this.color = color;
   }
   //draw() is an arbitrary naming convention, can be named whatever we want
   draw() {
-    c.fillStyle = "red";
-    c.fillRect(this.position.x, this.position.y, 50, this.height);
+    c.fillStyle = this.color;
+    c.fillRect(this.position.x, this.position.y, this.width, this.height);
+
+    //attack boxes
+    c.fillStyle = "green";
+    c.fillRect(
+      this.attackBox.position.x,
+      this.attackBox.position.y,
+      this.attackBox.width,
+      this.attackBox.height
+    );
   }
 
   update() {
@@ -61,6 +77,7 @@ const enemy = new Sprite({
     x: 0,
     y: 0,
   },
+  color: "blue",
 });
 
 // with the aid of this we can be pressing the d key and making the sprite move right,
@@ -111,6 +128,14 @@ function animate() {
   } else if (keys.ArrowRight.pressed && enemy.lastKey === "ArrowRight") {
     enemy.velocity.x = 5;
   }
+
+  //detect for collision
+  if (
+    player.attackBox.position.x + player.attackBox.width >= enemy.position.x &&
+    player.attackBox.position.x <= enemy.position.x + enemy.width
+  ) {
+    console.log("hit!");
+  }
 }
 
 animate();
@@ -141,7 +166,6 @@ window.addEventListener("keydown", (event) => {
       enemy.velocity.y = -20;
       break;
   }
-  console.log(event.key);
 });
 
 window.addEventListener("keyup", (event) => {
