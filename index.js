@@ -27,6 +27,7 @@ class Sprite {
       height: 50,
     };
     this.color = color;
+    this.isAttacking;
   }
   //draw() is an arbitrary naming convention, can be named whatever we want
   draw() {
@@ -54,6 +55,13 @@ class Sprite {
       //   line below from chatGPT to smooth sprites hitting bottom
       this.position.y = canvas.height - this.height;
     } else this.velocity.y += gravity;
+  }
+
+  attack() {
+    this.isAttacking = true;
+    setTimeout(() => {
+      this.isAttacking = false;
+    }, 100);
   }
 }
 
@@ -134,7 +142,8 @@ function animate() {
     player.attackBox.position.x + player.attackBox.width >= enemy.position.x &&
     player.attackBox.position.x <= enemy.position.x + enemy.width &&
     player.attackBox.position.y + player.attackBox.height >= enemy.position.y &&
-    player.attackBox.position.y <= enemy.position.y + enemy.height
+    player.attackBox.position.y <= enemy.position.y + enemy.height &&
+    player.isAttacking
   ) {
     console.log("hit!");
   }
@@ -144,6 +153,7 @@ animate();
 
 window.addEventListener("keydown", (event) => {
   switch (event.key) {
+    //player movement
     case "d":
       keys.d.pressed = true;
       player.lastKey = "d";
@@ -155,7 +165,11 @@ window.addEventListener("keydown", (event) => {
     case "w":
       player.velocity.y = -20;
       break;
+      case ' ':
+        player.attack()
+        break
 
+    //enemy movement
     case "ArrowRight":
       keys.ArrowRight.pressed = true;
       enemy.lastKey = "ArrowRight";
@@ -168,6 +182,7 @@ window.addEventListener("keydown", (event) => {
       enemy.velocity.y = -20;
       break;
   }
+  console.log(event.key);
 });
 
 window.addEventListener("keyup", (event) => {
