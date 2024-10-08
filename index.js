@@ -39,15 +39,15 @@ class Sprite {
     c.fillRect(this.position.x, this.position.y, this.width, this.height);
 
     //attack boxes
-    // if (this.isAttacking) {
-    c.fillStyle = "green";
-    c.fillRect(
-      this.attackBox.position.x,
-      this.attackBox.position.y,
-      this.attackBox.width,
-      this.attackBox.height
-    );
-    // }
+    if (this.isAttacking) {
+      c.fillStyle = "green";
+      c.fillRect(
+        this.attackBox.position.x,
+        this.attackBox.position.y,
+        this.attackBox.width,
+        this.attackBox.height
+      );
+    }
   }
 
   update() {
@@ -126,16 +126,17 @@ const keys = {
 
 function rectangularCollision({ rectangle1, rectangle2 }) {
   return (
+    //cmd + D for multi cursor
     //ensures left side of attack box is to the right of the enemies leftmost border
     rectangle1.attackBox.position.x + rectangle1.attackBox.width >=
       rectangle2.position.x &&
-      //ensures right side of attack is to the left of enemies rightmost border
+    //ensures right side of attack is to the left of enemies rightmost border
     rectangle1.attackBox.position.x <=
       rectangle2.position.x + rectangle2.width &&
-      //ensures top of attack is below the top of the enemy sprite
+    //ensures top of attack is below the top of the enemy sprite
     rectangle1.attackBox.position.y + rectangle1.attackBox.height >=
       rectangle2.position.y &&
-      //ensures the top of the attack is above the bottom of the enemy sprite
+    //ensures the top of the attack is above the bottom of the enemy sprite
     rectangle1.attackBox.position.y <= rectangle2.position.y + rectangle2.height
   );
 }
@@ -180,6 +181,17 @@ function animate() {
     player.isAttacking = false;
     console.log("hit!");
   }
+
+  if (
+    rectangularCollision({
+      rectangle1: enemy,
+      rectangle2: player,
+    }) &&
+    enemy.isAttacking
+  ) {
+    enemy.isAttacking = false;
+    console.log("YEOWCH!");
+  }
 }
 
 animate();
@@ -214,8 +226,12 @@ window.addEventListener("keydown", (event) => {
     case "ArrowUp":
       enemy.velocity.y = -20;
       break;
+    case "ArrowDown":
+      enemy.attack();
+      //^how i did it, \/ how I was shown to do it (introduces bugs)
+      // enemy.isAttacking = true
+      break;
   }
-  console.log(event.key);
 });
 
 window.addEventListener("keyup", (event) => {
