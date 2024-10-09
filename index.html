@@ -1,7 +1,17 @@
 <html>
   <head></head>
   <body>
-    <canvas></canvas>
+    <div style="position: relative; display: inline-block">
+      <div style="position: absolute; display: flex; width: 100%; align-items: center;">
+        <!-- player health -->
+        <div style="background-color: yellow; height: 30px; width: 100%"></div>
+        <!-- timer -->
+        <div style="background-color: red; width: 100px; height: 100px; flex-shrink: 0"></div>
+        <!-- enemy health -->
+        <div style="background-color: yellow; height: 30px; width: 100%"></div>
+      </div>
+      <canvas></canvas>
+    </div>
     <script src="./index.js"></script>
   </body>
 </html>
