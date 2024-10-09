@@ -1,12 +1,39 @@
 <html>
-  <head></head>
+  <head>
+    <style>
+      * {
+        /* When you use box-sizing: border-box, the padding and border are included 
+      inside the specified width and height. This means that 
+      the total size of the element remains the width property,
+      regardless of padding and border. 
+      It simplifies layout calculations bc the total size of the element is predictable.
+      */
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
   <body>
     <div style="position: relative; display: inline-block">
-      <div style="position: absolute; display: flex; width: 100%; align-items: center;">
+      <div
+        style="
+          position: absolute;
+          display: flex;
+          width: 100%;
+          align-items: center;
+          padding: 20px;
+        "
+      >
         <!-- player health -->
         <div style="background-color: yellow; height: 30px; width: 100%"></div>
         <!-- timer -->
-        <div style="background-color: red; width: 100px; height: 100px; flex-shrink: 0"></div>
+        <div
+          style="
+            background-color: red;
+            width: 100px;
+            height: 100px;
+            flex-shrink: 0;
+          "
+        ></div>
         <!-- enemy health -->
         <div style="background-color: yellow; height: 30px; width: 100%"></div>
       </div>
