@@ -142,7 +142,17 @@ function rectangularCollision({ rectangle1, rectangle2 }) {
   );
 }
 
-let timer = 5;
+function determineWinner({player, enemy}) {
+  if (player.health === enemy.health) {
+    document.querySelector("#displayText").innerHTML = "Tie";
+  } else if (player.health > enemy.health) {
+    document.querySelector("#displayText").innerHTML = "Player 1 Wins";
+  } else if (player.health < enemy.health) {
+    document.querySelector("#displayText").innerHTML = "Player 2 Wins";
+  }
+}
+
+let timer = 4;
 function decreaseTimer() {
   if (timer > 0) {
     setTimeout(decreaseTimer, 1000);
@@ -151,13 +161,7 @@ function decreaseTimer() {
   }
   if (timer === 0) {
     document.querySelector("#displayText").style.display = "flex";
-    if (player.health === enemy.health) {
-      document.querySelector("#displayText").innerHTML = "Tie";
-    } else if (player.health > enemy.health) {
-      document.querySelector("#displayText").innerHTML = "Player 1 Wins";
-    } else if (player.health < enemy.health) {
-      document.querySelector("#displayText").innerHTML = "Player 2 Wins";
-    }
+    determineWinner({player, enemy})
   }
 }
 decreaseTimer();
@@ -214,6 +218,11 @@ function animate() {
     enemy.isAttacking = false;
     player.health -= 20;
     document.querySelector("#playerHealth").style.width = player.health + "%";
+  }
+
+  // end game based on health
+  if (enemy.health <= 0 || player.health <= 0) {
+
   }
 }
 
