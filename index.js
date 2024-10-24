@@ -142,6 +142,16 @@ function rectangularCollision({ rectangle1, rectangle2 }) {
   );
 }
 
+let timer = 10;
+function decreaseTimer() {
+  setTimeout(decreaseTimer, 1000)
+  if (timer > 0) {
+    timer--;
+    document.querySelector('#timer').innerHTML = timer
+  }
+}
+decreaseTimer()
+
 //arbitrary naming convention, can be named whatever we want
 function animate() {
   //The window.requestAnimationFrame() method tells the browser you wish to perform an animation.
