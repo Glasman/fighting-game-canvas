@@ -1,13 +1,17 @@
 class Sprite {
   //constructor arguments wrapped in one object to minimize confusion when putting in many arguments
   //this way the order of the arguments does not matter and they are not required as they are all just properties of the object being passed in
-  constructor({ position }) {
+  constructor({ position, imageSrc }) {
     this.position = position;
     this.width = 50;
     this.height = 150;
+    this.image = new Image()
+    this.image.src = imageSrc
   }
   //draw() is an arbitrary naming convention, can be named whatever we want
-  draw() {}
+  draw() {
+    c.drawImage(this.image, this.position.x, this.position.y)
+  }
 
   update() {
     this.draw();
@@ -64,7 +68,7 @@ class Fighter {
     if (this.position.y + this.height + this.velocity.y >= canvas.height) {
       this.velocity.y = 0;
       //   line below from chatGPT to smooth sprites hitting bottom
-      this.position.y = canvas.height - this.height;
+      //   this.position.y = canvas.height - this.height;
     } else this.velocity.y += gravity;
   }
 
