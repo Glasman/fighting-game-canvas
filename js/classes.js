@@ -1,27 +1,46 @@
 class Sprite {
   //constructor arguments wrapped in one object to minimize confusion when putting in many arguments
   //this way the order of the arguments does not matter and they are not required as they are all just properties of the object being passed in
-  constructor({ position, imageSrc, scale = 1 }) {
+  constructor({ position, imageSrc, scale = 1, framesMax = 1 }) {
     this.position = position;
     this.width = 50;
     this.height = 150;
     this.image = new Image();
     this.image.src = imageSrc;
     this.scale = scale;
+    this.framesMax = framesMax;
+    this.framesCurrent = 0;
+    this.framesElapsed = 0;
+    this.framesHold = 7;
   }
   //draw() is an arbitrary naming convention, can be named whatever we want
   draw() {
     c.drawImage(
       this.image,
+      //next 4 lines are where cropping starts
+      this.framesCurrent * (this.image.width / this.framesMax),
+      0,
+      this.image.width / this.framesMax,
+      this.image.height,
+      //below are the actual stats of the image; x position, y position, image width, image height
       this.position.x,
       this.position.y,
-      this.image.width * this.scale,
+      (this.image.width / this.framesMax) * this.scale,
       this.image.height * this.scale
     );
   }
 
   update() {
     this.draw();
+    this.framesElapsed++;
+
+    if (this.framesElapsed % this.framesHold === 0) {
+      if (this.framesCurrent < this.framesMax - 1) {
+        this.framesCurrent++;
+      } else {
+        this.framesCurrent = 0;
+      }
+    }
   }
 }
 
