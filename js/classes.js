@@ -1,16 +1,23 @@
 class Sprite {
   //constructor arguments wrapped in one object to minimize confusion when putting in many arguments
   //this way the order of the arguments does not matter and they are not required as they are all just properties of the object being passed in
-  constructor({ position, imageSrc }) {
+  constructor({ position, imageSrc, scale = 1 }) {
     this.position = position;
     this.width = 50;
     this.height = 150;
-    this.image = new Image()
-    this.image.src = imageSrc
+    this.image = new Image();
+    this.image.src = imageSrc;
+    this.scale = scale;
   }
   //draw() is an arbitrary naming convention, can be named whatever we want
   draw() {
-    c.drawImage(this.image, this.position.x, this.position.y)
+    c.drawImage(
+      this.image,
+      this.position.x,
+      this.position.y,
+      this.image.width * this.scale,
+      this.image.height * this.scale
+    );
   }
 
   update() {
