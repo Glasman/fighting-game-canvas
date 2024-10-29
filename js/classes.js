@@ -65,7 +65,7 @@ class Fighter {
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
 
-    if (this.position.y + this.height + this.velocity.y >= canvas.height) {
+    if (this.position.y + this.height + this.velocity.y >= canvas.height - 96) {
       this.velocity.y = 0;
       //   line below from chatGPT to smooth sprites hitting bottom
       //   this.position.y = canvas.height - this.height;
