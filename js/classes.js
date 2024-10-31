@@ -1,7 +1,13 @@
 class Sprite {
   //constructor arguments wrapped in one object to minimize confusion when putting in many arguments
   //this way the order of the arguments does not matter and they are not required as they are all just properties of the object being passed in
-  constructor({ position, imageSrc, scale = 1, framesMax = 1 }) {
+  constructor({
+    position,
+    imageSrc,
+    scale = 1,
+    framesMax = 1,
+    offset = { x: 0, y: 0 },
+  }) {
     this.position = position;
     this.width = 50;
     this.height = 150;
@@ -12,6 +18,7 @@ class Sprite {
     this.framesCurrent = 0;
     this.framesElapsed = 0;
     this.framesHold = 7;
+    this.offset = offset;
   }
   //draw() is an arbitrary naming convention, can be named whatever we want
   draw() {
@@ -23,8 +30,8 @@ class Sprite {
       this.image.width / this.framesMax,
       this.image.height,
       //below are the actual stats of the image; x position, y position, image width, image height
-      this.position.x,
-      this.position.y,
+      this.position.x - this.offset.x,
+      this.position.y - this.offset.y,
       (this.image.width / this.framesMax) * this.scale,
       this.image.height * this.scale
     );
@@ -51,10 +58,11 @@ class Fighter extends Sprite {
     position,
     velocity,
     color = "red",
-    offset,
+
     imageSrc,
     scale = 1,
     framesMax = 1,
+    offset = { x: 0, y: 0 },
   }) {
     //super() calls constructor of the parent
     super({
@@ -62,6 +70,10 @@ class Fighter extends Sprite {
       imageSrc,
       scale,
       framesMax,
+      offset,
+      //   framesCurrent,
+      //   framesElapsed,
+      //   framesHold
     });
 
     this.velocity = velocity;
@@ -80,6 +92,7 @@ class Fighter extends Sprite {
     this.color = color;
     this.isAttacking;
     this.health = 100;
+    //if animation keeps bugging get rid of below and go back to 2:28 in vid
     this.framesCurrent = 0;
     this.framesElapsed = 0;
     this.framesHold = 7;
@@ -88,6 +101,17 @@ class Fighter extends Sprite {
 
   update() {
     this.draw();
+
+    this.framesElapsed++;
+
+    if (this.framesElapsed % this.framesHold === 0) {
+      if (this.framesCurrent < this.framesMax - 1) {
+        this.framesCurrent++;
+      } else {
+        this.framesCurrent = 0;
+      }
+    }
+
     this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
     this.attackBox.position.y = this.position.y;
 
