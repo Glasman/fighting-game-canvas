@@ -95,7 +95,7 @@ class Fighter extends Sprite {
     //if animation keeps bugging get rid of below and go back to 2:28 in vid
     this.framesCurrent = 0;
     this.framesElapsed = 0;
-    this.framesHold = 7;
+    this.framesHold = 6;
   }
   //draw() is an arbitrary naming convention, can be named whatever we want
 
