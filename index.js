@@ -15,21 +15,20 @@ const gravity = 0.8;
 const background = new Sprite({
   position: {
     x: 0,
-    y: 0
+    y: 0,
   },
-  imageSrc: './img/background.png'
-})
+  imageSrc: "./img/background.png",
+});
 
 const shop = new Sprite({
   position: {
     x: 600,
-    y: 128
+    y: 128,
   },
-  imageSrc: './img/shop.png',
+  imageSrc: "./img/shop.png",
   scale: 2.75,
-  framesMax: 6
-})
-
+  framesMax: 6,
+});
 
 const player = new Fighter({
   position: {
@@ -44,6 +43,9 @@ const player = new Fighter({
     x: 0,
     y: 0,
   },
+  imageSrc: "./img/samuraiMack/Idle.png",
+  framesMax: 8,
+  scale: 2.5
 });
 
 const enemy = new Fighter({
@@ -82,7 +84,6 @@ const keys = {
   },
 };
 
-
 decreaseTimer();
 
 //arbitrary naming convention, can be named whatever we want
@@ -94,8 +95,8 @@ function animate() {
 
   c.fillStyle = "black";
   c.fillRect(0, 0, canvas.width, canvas.height);
-  background.update()
-  shop.update()
+  background.update();
+  shop.update();
   player.update();
   enemy.update();
 
