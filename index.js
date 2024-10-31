@@ -48,8 +48,8 @@ const player = new Fighter({
   scale: 2.5,
   offset: {
     x: 215,
-    y: 157
-  }
+    y: 157,
+  },
 });
 
 const enemy = new Fighter({
