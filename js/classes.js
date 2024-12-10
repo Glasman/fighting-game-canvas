@@ -51,7 +51,7 @@ class Sprite {
 
   update() {
     this.draw();
-    this.animateFrames()
+    this.animateFrames();
   }
 }
 
@@ -67,6 +67,7 @@ class Fighter extends Sprite {
     scale = 1,
     framesMax = 1,
     offset = { x: 0, y: 0 },
+    sprites,
   }) {
     //super() calls constructor of the parent
     super({
@@ -100,13 +101,19 @@ class Fighter extends Sprite {
     this.framesCurrent = 0;
     this.framesElapsed = 0;
     this.framesHold = 6;
+    this.sprites = sprites;
+
+    for (const sprite in this.sprites) {
+      sprites[sprite].image = new Image();
+      sprites[sprite].image.src = sprites[sprite].imageSrc;
+    }
+    console.log(this.sprites);
   }
   //draw() is an arbitrary naming convention, can be named whatever we want
 
   update() {
     this.draw();
-    this.animateFrames()
-
+    this.animateFrames();
 
     this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
     this.attackBox.position.y = this.position.y;
