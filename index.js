@@ -66,13 +66,17 @@ const player = new Fighter({
     fall: {
       imageSrc: "./img/samuraiMack/Fall.png",
       framesMax: 2,
-    }
+    },
+    attack1: {
+      imageSrc: "./img/samuraiMack/Attack1.png",
+      framesMax: 6,
+    },
   },
 });
 
 const enemy = new Fighter({
   position: {
-    x: 400, 
+    x: 400,
     y: 100,
   },
   velocity: {
@@ -125,25 +129,50 @@ function animate() {
   player.velocity.x = 0;
   enemy.velocity.x = 0;
 
-  //player movement
+  // //player movement
+  // if (keys.a.pressed && player.lastKey === "a") {
+  //   player.velocity.x = -5;
+  //   player.switchSprite('run')
+  // } else if (keys.d.pressed && player.lastKey === "d") {
+  //   player.velocity.x = 5;
+  //   player.image = player.sprites.run.image;
+  //   player.switchSprite('run')
+  // } else {
+  //   player.switchSprite('idle')
+
+  // }
+
+  // //jumping
+  // if (player.velocity.y < 0) {
+  //   player.switchSprite('jump')
+  // } else if (player.velocity.y > 0) {
+  //   player.switchSprite('fall')
+
+  // }
+
+  // Player movement
   if (keys.a.pressed && player.lastKey === "a") {
     player.velocity.x = -5;
-    player.switchSprite('run')
+    if (!player.isAttacking) player.switchSprite("run");
   } else if (keys.d.pressed && player.lastKey === "d") {
     player.velocity.x = 5;
-    player.image = player.sprites.run.image;
-    player.switchSprite('run')
+    if (!player.isAttacking) player.switchSprite("run");
   } else {
-    player.switchSprite('idle')
-
+    if (!player.isAttacking) player.switchSprite("idle");
   }
 
-  //jumping
-  if (player.velocity.y < 0) {
-    player.switchSprite('jump')
-  } else if (player.velocity.y > 0) {
-    player.switchSprite('fall')
+  // Attack logic
+  if (player.isAttacking) {
+    if (player.image !== player.sprites.attack1.image) {
+      player.switchSprite("attack1");
+    }
+  }
 
+  // Jumping and falling states
+  if (player.velocity.y < 0) {
+    if (!player.isAttacking) player.switchSprite("jump");
+  } else if (player.velocity.y > 0) {
+    if (!player.isAttacking) player.switchSprite("fall");
   }
 
   //enemy movement
@@ -201,7 +230,10 @@ window.addEventListener("keydown", (event) => {
       player.velocity.y = -20;
       break;
     case " ":
-      player.attack();
+      // player.attack();
+      if (!player.isAttacking) {
+        player.attack(); // Attack logic
+      }
       break;
 
     //enemy movement
