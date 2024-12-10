@@ -123,8 +123,7 @@ class Fighter extends Sprite {
 
     if (this.position.y + this.height + this.velocity.y >= canvas.height - 96) {
       this.velocity.y = 0;
-      //   line below from chatGPT to smooth sprites hitting bottom
-      //   this.position.y = canvas.height - this.height;
+      this.position.y = 330;
     } else this.velocity.y += gravity;
   }
 
