@@ -74,10 +74,10 @@ const player = new Fighter({
   },
   attackBox: {
     offset: {
-      x: 100,
+      x: 60,
       y: 50,
     },
-    width: 160,
+    width: 200,
     height: 50,
   },
 });
@@ -127,10 +127,10 @@ const enemy = new Fighter({
   },
   attackBox: {
     offset: {
-      x: 0,
-      y: 0,
+      x: -170,
+      y: 50,
     },
-    width: 100,
+    width: 170,
     height: 50,
   },
 });
@@ -272,6 +272,10 @@ function animate() {
     enemy.isAttacking = false;
     player.health -= 20;
     document.querySelector("#playerHealth").style.width = player.health + "%";
+  }
+
+  if(enemy.isAttacking && enemy.framesCurrent === 2){
+    enemy.isAttacking = false;
   }
 
   // end game based on health
