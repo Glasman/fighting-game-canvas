@@ -74,10 +74,10 @@ const player = new Fighter({
   },
   attackBox: {
     offset: {
-      x: 0,
-      y: 0,
+      x: 100,
+      y: 50,
     },
-    width: 100,
+    width: 160,
     height: 50,
   },
 });
@@ -250,7 +250,7 @@ function animate() {
       rectangle1: player,
       rectangle2: enemy,
     }) &&
-    player.isAttacking
+    player.isAttacking 
   ) {
     player.isAttacking = false;
     enemy.health -= 20;
