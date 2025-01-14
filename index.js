@@ -75,6 +75,10 @@ const player = new Fighter({
       imageSrc: "./img/samuraiMack/Take Hit - white silhouette.png",
       framesMax: 4,
     },
+    death: {
+      imageSrc: "./img/samuraiMack/Death.png",
+      framesMax: 6,
+    },
   },
   attackBox: {
     offset: {
@@ -131,7 +135,11 @@ const enemy = new Fighter({
     takeHit: {
       imageSrc: './img/kenji/Take hit.png',
       framesMax: 3
-    }
+    },
+    death: {
+      imageSrc: "./img/kenji/Death.png",
+      framesMax: 7,
+    },
   },
   attackBox: {
     offset: {
