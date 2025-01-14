@@ -133,8 +133,8 @@ const enemy = new Fighter({
       framesMax: 4,
     },
     takeHit: {
-      imageSrc: './img/kenji/Take hit.png',
-      framesMax: 3
+      imageSrc: "./img/kenji/Take hit.png",
+      framesMax: 3,
     },
     death: {
       imageSrc: "./img/kenji/Death.png",
@@ -266,15 +266,16 @@ function animate() {
       rectangle1: player,
       rectangle2: enemy,
     }) &&
-    player.isAttacking && player.framesCurrent === 4
+    player.isAttacking &&
+    player.framesCurrent === 4
   ) {
-    enemy.takeHit()
+    enemy.takeHit();
     player.isAttacking = false;
     document.querySelector("#enemyHealth").style.width = enemy.health + "%";
   }
 
   //if player misses
-  if(player.isAttacking && player.framesCurrent === 4){
+  if (player.isAttacking && player.framesCurrent === 4) {
     player.isAttacking = false;
   }
 
@@ -284,14 +285,15 @@ function animate() {
       rectangle1: enemy,
       rectangle2: player,
     }) &&
-    enemy.isAttacking && enemy.framesCurrent === 2
+    enemy.isAttacking &&
+    enemy.framesCurrent === 2
   ) {
-    player.takeHit()
+    player.takeHit();
     enemy.isAttacking = false;
     document.querySelector("#playerHealth").style.width = player.health + "%";
   }
 
-  if(enemy.isAttacking && enemy.framesCurrent === 2){
+  if (enemy.isAttacking && enemy.framesCurrent === 2) {
     enemy.isAttacking = false;
   }
 

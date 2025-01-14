@@ -115,7 +115,6 @@ class Fighter extends Sprite {
   update() {
     this.draw();
     if (!this.dead) this.animateFrames();
-   
 
     this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
     this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
@@ -152,7 +151,7 @@ class Fighter extends Sprite {
   switchSprite(sprite) {
     if (this.image === this.sprites.death.image) {
       if (this.framesCurrent === this.sprites.death.framesMax - 1)
-      this.dead = true;
+        this.dead = true;
       return;
     }
     //overrides all other animations with attack animation
