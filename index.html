@@ -15,12 +15,50 @@
       It simplifies layout calculations bc the total size of the element is predictable.
       */
         box-sizing: border-box;
-        font-family: 'Press Start 2P', cursive;
+        font-family: "Press Start 2P", cursive;
         /* .press-start-2p-regular {
           font-family: "Press Start 2P", serif;
           font-weight: 400;
           font-style: normal;
         } */
+      }
+
+      #game-controls {
+        position: absolute;
+        top: 515px;
+        right: 10px;
+      }
+
+      #game-controls button {
+        margin: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+      }
+
+      #instructions-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+      }
+
+      #instructions-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        text-align: center;
+      }
+
+      #close-instructions {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
       }
     </style>
   </head>
@@ -101,6 +139,28 @@
             "
           ></div>
         </div>
+
+        <div id="game-controls" > 
+          <button id="show-instructions" >Instructions</button>
+        </div>
+
+        <div id="instructions-modal" class="hidden">
+          <div id="instructions-content">
+            <span id="close-instructions">&times;</span>
+            <h2>How to Play</h2>
+            <h3>Player 1</h3>
+            <p>W = Jump</p>
+            <p>S = Attack</p>
+            <p>A = Move Left</p>
+            <p>D = Move Right</p>
+            <h3>Player 2</h3>
+            <p>Up = Jump</p>
+            <p>Down = Attack</p>
+            <p>Left = Move Left</p>
+            <p>Right = Move Right</p>
+            <h3>To start a new game refresh the browser</h3>
+          </div>
+        </div>
       </div>
       <div
         id="displayText"
@@ -120,6 +180,7 @@
       >
         Tie
       </div>
+
       <canvas></canvas>
     </div>
     <script src="js/utils.js"></script>

@@ -173,6 +173,25 @@ const keys = {
 
 decreaseTimer();
 
+
+// Show instructions modal
+document.getElementById("show-instructions").onclick = function () {
+  document.getElementById("instructions-modal").style.display = "flex";
+};
+
+// Close instructions modal
+document.getElementById("close-instructions").onclick = function () {
+  document.getElementById("instructions-modal").style.display = "none";
+};
+
+// Optional: Close instructions when clicking outside the modal content
+window.onclick = function (event) {
+  if (event.target == document.getElementById("instructions-modal")) {
+    document.getElementById("instructions-modal").style.display = "none";
+  }
+};
+
+
 //arbitrary naming convention, can be named whatever we want
 function animate() {
   //The window.requestAnimationFrame() method tells the browser you wish to perform an animation.
